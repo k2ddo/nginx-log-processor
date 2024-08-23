@@ -14,5 +14,4 @@ def get_env_var(
         if raise_exception:
             raise MissingEnvVariable(f'{variable_name} is missing')
     
-    print(type(variable))
     return variable
