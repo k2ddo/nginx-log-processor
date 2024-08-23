@@ -1,0 +1,24 @@
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=logs_db
+      - POSTGRES_USER=logs
+      - POSTGRES_PASSWORD=logs
+  web:
+    build: .
+    command: sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - SECRET_KEY=#w1_ht$4zlv_@b#kr%@y11t)2y3j*pyc^wwl!vmu(t!1#ed5xj
+      - DEBUG=True
+      - ALLOWED_HOSTS=*
+      - DB_NAME=logs_db
+      - DB_USER=logs
+      - DB_PASSWORD=logs
+      - DB_HOST=db
