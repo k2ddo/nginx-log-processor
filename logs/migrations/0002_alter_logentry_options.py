@@ -4,14 +4,17 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('logs', '0001_initial'),
+        ("logs", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='logentry',
-            options={'ordering': ['-date'], 'verbose_name': 'Лог запись', 'verbose_name_plural': 'Лог записи'},
+            name="logentry",
+            options={
+                "ordering": ["-date"],
+                "verbose_name": "Лог запись",
+                "verbose_name_plural": "Лог записи",
+            },
         ),
     ]

@@ -7,11 +7,12 @@ class LogEntrySerializer(ModelSerializer):
     class Meta:
         model = LogEntry
         fields = (
-            'date',
-            'ip_address',
-            'user',
-            'http_method',
-            'request_uri',
-            'response_code',
-            'response_size',
+            "id",
+            "date",
+            "ip_address",
+            "user",
+            "http_method",
+            "request_uri",
+            "response_code",
+            "response_size",
         )

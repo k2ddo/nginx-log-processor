@@ -1,0 +1,59 @@
+[project]
+name = "nginx-log-processor"
+version = "0.1.0"
+description = "A small Django API for importing and querying structured Nginx access logs"
+readme = "README.md"
+requires-python = ">=3.12,<3.15"
+dependencies = [
+    "django>=6.1,<6.2",
+    "django-filter>=26.1,<27",
+    "django-unfold>=0.103.0,<0.104",
+    "djangorestframework>=3.17.1,<4",
+    "drf-spectacular>=0.30.0,<1",
+    "gunicorn>=23.0.0,<24",
+    "ijson>=3.5.1,<4",
+    "psycopg[binary]>=3.3.4,<4",
+    "python-dotenv>=1.1.1,<2",
+    "requests>=2.32.5,<3",
+    "whitenoise>=6.9.0,<7",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.2,<9",
+    "pytest-cov>=7.0.0,<8",
+    "pytest-django>=4.11.1,<5",
+    "ruff>=0.16.2,<0.17",
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings"
+addopts = "--strict-markers --cov=config --cov=logs --cov-report=term-missing"
+filterwarnings = [
+    "ignore:No directory at.*staticfiles/:UserWarning",
+    "ignore:Overriding get_action_choices.*:django.utils.deprecation.RemovedInDjango70Warning",
+]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+omit = ["config/asgi.py", "config/wsgi.py", "logs/migrations/*", "manage.py"]
+
+[tool.coverage.report]
+fail_under = 90
+show_missing = true
+skip_covered = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["B", "DJ", "E", "F", "I", "SIM", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+"logs/migrations/*.py" = ["E501"]
+"tests/*.py" = ["DJ008"]
+
+[tool.ruff.format]
+quote-style = "double"
